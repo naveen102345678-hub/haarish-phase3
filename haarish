@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Scheduler App</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    h1 { text-align: center; }
+    form { margin-bottom: 30px; }
+    label { display: block; margin-top: 10px; }
+    input, textarea, select { width: 100%; padding: 8px; margin-top: 5px; }
+    .event-list { margin-top: 20px; }
+    .event-item { border-bottom: 1px solid #ccc; padding: 10px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Event Scheduler</h1>
+    <form id="eventForm">
+      <label for="title">Event Title:</label>
+      <input type="text" id="title" name="title" required>
+
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="time">Time:</label>
+      <input type="time" id="time" name="time" required>
+
+      <label for="description">Description:</label>
+      <textarea id="description" name="description"></textarea>
+
+      <button type="submit">Add Event</button>
+    </form>
+    <div class="event-list" id="eventList">
+      <!-- Events will be listed here -->
+    </div>
+  </div>
+  <script>
+    // Basic JS to add events to the list
+    document.getElementById('eventForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      const description = document.getElementById('description').value;
+      const eventList = document.getElementById('eventList');
+
+      const eventItem = document.createElement('div');
+      eventItem.className = 'event-item';
+      eventItem.innerHTML = `<strong>${title}</strong><br>
+        ${date} ${time}<br>
+        ${description ? description : ''}`;
+      eventList.appendChild(eventItem);
+
+      // Clear the form
+      document.getElementById('eventForm').reset();
+    });
+  </script>
+</body>
+</html>
